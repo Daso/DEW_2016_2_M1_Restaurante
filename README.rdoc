@@ -1,4 +1,5 @@
 Este tutorial tiene por objetivos:
+
 •	Aprender a realizar cambios en la configuración de un proyecto generado a partir de una copia.
 •	Adicionar el soporte de archivos adjuntos, en especial imágenes, como atributos de modelos.
 •	Automatizar la generación de registros pre-establecidos por medio de seeds.
@@ -72,7 +73,9 @@ Category.create(name: 'Chicken', description: 'Served with fried rice, choice of
 Category.create(name: 'Vegetables', description: 'With white rice')
 Category.create(name: 'Beverages')
 Category.create(name: 'Wines', description: 'Our exclusive wine selection')
+
 # Products
+
 Product.create(name: 'Spring Roll',                
               description: 'Mini Spring Roll with 10 pieces',                
               category: Category.find_by(name: 'Appetizers'),               
@@ -113,6 +116,7 @@ Construyendo la vista para la carta de Menú
 
 Los siguientes pasos nos permitirán contar con una vista que presente la carta de menú. Para ello, abrimos para edición la vistaapp/views/menu/index.html.erb y reemplazamos el contenido con las siguientes instrucciones:
 
+
 <h1>Our Menu</h1>
 <% @categories.each do |category| %>
  <div class="page-header">
@@ -135,6 +139,7 @@ Los siguientes pasos nos permitirán contar con una vista que presente la carta 
  <% end %>
 <% end %>
 
+
 Guardamos los cambios en el archivo index.html.erb. A través de estas sentencias, estamos implementando una vista de los productos que ofrece Wok & Wine, organizados por categorías. Gracias a la inclusión del soporte para el framework Bootstrap, tenemos a nuestra disposición las clases de estilo que forman parte del framework. En esta vista hacemos uso de CSS classes como page-header, row, thumbnail y caption. Nuestra lógica es en esencia bastante simple: Para cada categoría, presentamos a manera de galerías aquellos productos que pertenezcan a dicha categoría, incluyendo la imagen asociada, el nombre y la descripción del producto.
 
 Creando una ruta personalizada
@@ -152,6 +157,7 @@ Adicionando un action personalizado a un controller
 
 Continuando con la implementación del feature menu for category, necesitamos contar con un custom action en MenuController. Según indicamos en la modificación de routes.rb, el action debe tener el nombre category. Abrimos para edición el archivo app/controllers/menu_controller.rb. Adicionamos la declaración de este método debajo del método index, por lo que la clase MenuController debería verse de la siguiente manera:
 
+
 class MenuController < ApplicationController
  def index
    # Obtaining categories collection
@@ -162,6 +168,7 @@ class MenuController < ApplicationController
  end
 end
 
+
 Guardamos los cambios en menu_controller.rb. Podemos apreciar que el action category genera una variable de instancia@category en base al parámetro recibido, la cual será utilizada por la vista correspondiente con el action. Para mantener la compatibilidad con los principios de convention-over-configuration y dejar que Ruby on Rails asocie automáticamente la vista con el action del controller, debemos llamar a la vistacategory.html.erb y ubicar el archivo en la ruta app/views/menu.
 
 Creando la vista personalizada para menu for category
@@ -171,6 +178,7 @@ A fin de concluir con esta parte de la experiencia web, necesitamos adicionar al
 # touch app/views/menu/category.html.erb
 
 A continación, abrimos para edición el archivo category.html.erb. Adicionamos a este archivo vacío las siguientes sentencias:
+
 
 <h1>Our Menu - Category</h1>
 <div class="page-header">
@@ -191,6 +199,7 @@ A continación, abrimos para edición el archivo category.html.erb. Adicionamos 
    <% end %>
  </div>
 <% end %>
+
 
 Guardamos el archivo category.html.erb. Como se observa, la experiencia es casi idéntica a la del menú estándar. Sin embargo nos permite ilustra cómo podemos construir rutas y acciones personalizadas  que incluyan además parámetros, resultando en vistas dinámicas personalizadas.
 Iniciamos la aplicación con
